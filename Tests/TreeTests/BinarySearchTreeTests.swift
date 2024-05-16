@@ -93,13 +93,100 @@ final class BinarySearchTreeTests: XCTestCase {
         let sut = fixture.makeBinarySearchTreeNumbersSUT()
         XCTAssertTrue(sut.contains(searchValue))
     }
+    
+    /// Validates that `remove(_ value:)` does nothing to an empty tree.
+    func test_remove_from_empty_tree() throws {
+        var sut = fixture.makeEmptyBinarySearchTreeSUT()
+        sut.remove(12345)
+        XCTAssertNil(sut.root)
+    }
+
+    /// Validates that after a `remove(_ value:)` from a tree with only one element
+    /// the remaining tree is empty.
+    func test_remove_from_one_element_tree() throws {
+        let number = 12345
+        var sut = fixture.makeBinarySearchTreeSUT(value: number)
+        sut.remove(number)
+        XCTAssertNil(sut.root)
+    }
+
+    /// Validates that `remove(_ value:)` leaves a properly balanced tree.
+    func test_remove_leaves_balanced_tree() throws {
+        var sut = fixture.makeComplexBinarySearchTreeNumbersSUT()
+        XCTAssertNotNil(sut.root)
+
+        let valueToRemove = 25
+        sut.remove(valueToRemove)
+
+        XCTAssertNotNil(sut.root)
+        XCTAssertFalse(sut.contains(valueToRemove))
+
+        var expectedArray = fixture.complexTreeNumbers.sorted()
+        let index = try XCTUnwrap(expectedArray.firstIndex(of: valueToRemove))
+        expectedArray.remove(at: index)
+        XCTAssertFalse(expectedArray.contains(where: { $0 == valueToRemove }))
+
+        var traversed = [Int]()
+        let root = try XCTUnwrap(sut.root)
+        root.traverseInOrder { traversed.append($0) }
+
+        XCTAssertEqual(traversed, expectedArray)
+    }
+    
+    /// Validates that `remove(_ value:)` leaves a properly balanced tree.
+    func test_remove_more_complex_tree() throws {
+        let extraValueLeft = 8
+        let extraValueRight = 23
+
+        var sut = fixture.makeComplexBinarySearchTreeNumbersSUT()
+        sut.insert(extraValueLeft)
+        sut.insert(extraValueRight)
+
+        XCTAssertNotNil(sut.root)
+
+        let valueToRemove1 = 17
+        sut.remove(valueToRemove1)
+
+        XCTAssertNotNil(sut.root)
+        XCTAssertFalse(sut.contains(valueToRemove1))
+
+        let valueToRemove2 = 10
+        sut.remove(valueToRemove2)
+
+        XCTAssertNotNil(sut.root)
+        XCTAssertFalse(sut.contains(valueToRemove2))
+
+        var expectedArray = fixture.complexTreeNumbers
+        expectedArray.append(contentsOf: [extraValueLeft, extraValueRight])
+        expectedArray.sort()
+
+        var index = try XCTUnwrap(expectedArray.firstIndex(of: valueToRemove1))
+        expectedArray.remove(at: index)
+        XCTAssertFalse(expectedArray.contains(where: { $0 == valueToRemove1 }))
+
+        index = try XCTUnwrap(expectedArray.firstIndex(of: valueToRemove2))
+        expectedArray.remove(at: index)
+        XCTAssertFalse(expectedArray.contains(where: { $0 == valueToRemove2 }))
+
+        var traversed = [Int]()
+        let root = try XCTUnwrap(sut.root)
+        root.traverseInOrder { traversed.append($0) }
+
+        XCTAssertEqual(traversed, expectedArray)
+    }
 }
 
 extension TreeFixture {
     var treeNumbers: [Int] {
         [40, 18, 77, 1, 20, 70, 105, 0, 25, 45, 88]
     }
-    
+
+    var complexTreeNumbers: [Int] {
+        [
+            50, 25, 75, 12, 37, 63, 87, 10, 17, 32, 45, 27, 33
+        ]
+    }
+
     func makeEmptyBinarySearchTreeSUT() -> BinarySearchTree<Int> {
         BinarySearchTree()
     }
@@ -110,6 +197,10 @@ extension TreeFixture {
 
     func makeBinarySearchTreeNumbersSUT() -> BinarySearchTree<Int> {
         makeBinarySearchTreeSUT(array: treeNumbers)
+    }
+    
+    func makeComplexBinarySearchTreeNumbersSUT() -> BinarySearchTree<Int> {
+        makeBinarySearchTreeSUT(array: complexTreeNumbers)
     }
     
     func makeBinarySearchTreeSUT(array: [Int]) -> BinarySearchTree<Int> {

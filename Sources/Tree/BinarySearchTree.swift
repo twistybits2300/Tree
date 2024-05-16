@@ -53,4 +53,46 @@ public struct BinarySearchTree<T: Comparable> {
 
         return false
     }
+    
+    /// Removes the provided `value` from the tree.
+    /// - Parameter value: The value to be removed.
+    public mutating func remove(_ value: T) {
+        root = remove(node: root, value: value)
+    }
+    
+    private func remove(node: TreeNode<T>?, value: T) -> TreeNode<T>? {
+        guard let node = node else {
+            return nil
+        }
+
+        if node.value == value {
+            if node.leftChild == nil, node.rightChild == nil {
+                return nil
+            }
+
+            if node.leftChild == nil {
+                return node.rightChild
+            }
+
+            if node.rightChild == nil {
+                return node.leftChild
+            }
+
+            if let rightMinValue = node.rightChild?.min.value {
+                node.value = rightMinValue
+            }
+            node.rightChild = remove(node: node.rightChild, value: node.value)
+        } else if value < node.value {
+            node.leftChild = remove(node: node.leftChild, value: value)
+        } else {
+            node.rightChild = remove(node: node.rightChild, value: value)
+        }
+        return node
+    }
+}
+
+private extension TreeNode {
+    var min: TreeNode {
+        leftChild?.min ?? self
+    }
 }
