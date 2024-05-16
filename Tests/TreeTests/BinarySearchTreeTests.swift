@@ -55,22 +55,20 @@ final class BinarySearchTreeTests: XCTestCase {
         XCTAssertEqual(traversed, expectedArray)
     }
 
-    /*
     /// Validates that `insert(_ value:)` properly creates a binary search tree when given
     /// a series of numbers.
     func test_insert() throws {
         let expectedArray = fixture.treeNumbers.sorted()
         let sut = fixture.makeBinarySearchTreeNumbersSUT()
-
+        
         XCTAssertNotNil(sut.root)
-
+        
         var traversed = [Int]()
         let root = try XCTUnwrap(sut.root)
         root.traverseInOrder { traversed.append($0) }
-
+        
         XCTAssertEqual(traversed, expectedArray)
     }
-    */
 }
 
 extension TreeFixture {
