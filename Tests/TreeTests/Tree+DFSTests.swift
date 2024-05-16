@@ -22,24 +22,23 @@ final class Tree_DFSTests: XCTestCase {
     /// expected order.
     func test_inOrderTraversal() throws {
         let expectedValues = [4, 2, 5, 1, 6, 3, 7]
-        var visitedNodes = [TreeNode<Int>]()
+        var visitedValues = [Int]()
         
         let root = fixture.makeNodeSUT(1)
-        root.set(left: fixture.makeNodeSUT(2))
-        root.set(right: fixture.makeNodeSUT(3))
+        root.leftChild = fixture.makeNodeSUT(2)
+        root.rightChild = fixture.makeNodeSUT(3)
         
-        root.left?.set(left: fixture.makeNodeSUT(4))
-        root.left?.set(right: fixture.makeNodeSUT(5))
+        root.leftChild?.leftChild = fixture.makeNodeSUT(4)
+        root.leftChild?.rightChild = fixture.makeNodeSUT(5)
         
-        root.right?.set(left: fixture.makeNodeSUT(6))
-        root.right?.set(right: fixture.makeNodeSUT(7))
+        root.rightChild?.leftChild = fixture.makeNodeSUT(6)
+        root.rightChild?.rightChild = fixture.makeNodeSUT(7)
         
         let sut = fixture.makeTreeSUT(root: root)
-        sut.inOrderTraversal { node in
-            visitedNodes.append(node)
+        sut.inOrderTraversal { value in
+            visitedValues.append(value)
         }
         
-        let visitedValues = visitedNodes.map { $0.value }
         XCTAssertEqual(visitedValues, expectedValues)
     }
     
@@ -59,24 +58,23 @@ final class Tree_DFSTests: XCTestCase {
     /// expected order.
     func test_preOrderTraversal() throws {
         let expectedValues = [1, 2, 4, 5, 3, 6, 7]
-        var visitedNodes = [TreeNode<Int>]()
+        var visitedValues = [Int]()
         
         let root = fixture.makeNodeSUT(1)
-        root.set(left: fixture.makeNodeSUT(2))
-        root.set(right: fixture.makeNodeSUT(3))
+        root.leftChild = fixture.makeNodeSUT(2)
+        root.rightChild = fixture.makeNodeSUT(3)
         
-        root.left?.set(left: fixture.makeNodeSUT(4))
-        root.left?.set(right: fixture.makeNodeSUT(5))
+        root.leftChild?.leftChild = fixture.makeNodeSUT(4)
+        root.leftChild?.rightChild = fixture.makeNodeSUT(5)
         
-        root.right?.set(left: fixture.makeNodeSUT(6))
-        root.right?.set(right: fixture.makeNodeSUT(7))
+        root.rightChild?.leftChild = fixture.makeNodeSUT(6)
+        root.rightChild?.rightChild = fixture.makeNodeSUT(7)
         
         let sut = fixture.makeTreeSUT(root: root)
         sut.preOrderTraversal { node in
-            visitedNodes.append(node)
+            visitedValues.append(node)
         }
         
-        let visitedValues = visitedNodes.map { $0.value }
         XCTAssertEqual(visitedValues, expectedValues)
     }
     
@@ -96,24 +94,23 @@ final class Tree_DFSTests: XCTestCase {
     /// expected order.
     func test_postOrderTraversal() throws {
         let expectedValues = [4, 5, 2, 6, 7, 3, 1]
-        var visitedNodes = [TreeNode<Int>]()
+        var visitedValues = [Int]()
         
         let root = fixture.makeNodeSUT(1)
-        root.set(left: fixture.makeNodeSUT(2))
-        root.set(right: fixture.makeNodeSUT(3))
+        root.leftChild = fixture.makeNodeSUT(2)
+        root.rightChild = fixture.makeNodeSUT(3)
         
-        root.left?.set(left: fixture.makeNodeSUT(4))
-        root.left?.set(right: fixture.makeNodeSUT(5))
+        root.leftChild?.leftChild = fixture.makeNodeSUT(4)
+        root.leftChild?.rightChild = fixture.makeNodeSUT(5)
         
-        root.right?.set(left: fixture.makeNodeSUT(6))
-        root.right?.set(right: fixture.makeNodeSUT(7))
+        root.rightChild?.leftChild = fixture.makeNodeSUT(6)
+        root.rightChild?.rightChild = fixture.makeNodeSUT(7)
         
         let sut = fixture.makeTreeSUT(root: root)
         sut.postOrderTraversal { node in
-            visitedNodes.append(node)
+            visitedValues.append(node)
         }
         
-        let visitedValues = visitedNodes.map { $0.value }
         XCTAssertEqual(visitedValues, expectedValues)
     }
 }

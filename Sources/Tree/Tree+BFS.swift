@@ -22,11 +22,11 @@ extension Tree {
             if let currentNode = queue.dequeue() {
                 visitor(currentNode)
                 
-                if let leftNode = currentNode.left {
+                if let leftNode = currentNode.leftChild {
                     queue.enqueue(leftNode)
                 }
                 
-                if let rightNode = currentNode.right {
+                if let rightNode = currentNode.rightChild {
                     queue.enqueue(rightNode)
                 }
             }

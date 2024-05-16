@@ -25,9 +25,9 @@ public struct BinarySearchTree<T: Comparable> {
         }
 
         if value < node.value {
-            node.set(left: insert(from: node.left, value: value))
+            node.leftChild = insert(from: node.leftChild, value: value)
         } else {
-            node.set(right: insert(from: node.right, value: value))
+            node.rightChild = insert(from: node.rightChild, value: value)
         }
 
         return node

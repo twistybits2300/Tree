@@ -25,14 +25,14 @@ final class Tree_BFSTests: XCTestCase {
         var visitedNodes = [TreeNode<Int>]()
         
         let root = fixture.makeNodeSUT(1)
-        root.set(left: fixture.makeNodeSUT(2))
-        root.set(right: fixture.makeNodeSUT(3))
+        root.leftChild = fixture.makeNodeSUT(2)
+        root.rightChild = fixture.makeNodeSUT(3)
         
-        root.left?.set(left: fixture.makeNodeSUT(4))
-        root.left?.set(right: fixture.makeNodeSUT(5))
+        root.leftChild?.leftChild = fixture.makeNodeSUT(4)
+        root.leftChild?.rightChild = fixture.makeNodeSUT(5)
         
-        root.right?.set(left: fixture.makeNodeSUT(6))
-        root.right?.set(right: fixture.makeNodeSUT(7))
+        root.rightChild?.leftChild = fixture.makeNodeSUT(6)
+        root.rightChild?.rightChild = fixture.makeNodeSUT(7)
         
         let sut = fixture.makeTreeSUT(root: root)
         sut.bfsTraversal { node in

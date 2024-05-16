@@ -50,7 +50,7 @@ final class BinarySearchTreeTests: XCTestCase {
             if let value = currentNode?.value {
                 traversed.append(value)
             }
-            currentNode = currentNode?.right
+            currentNode = currentNode?.rightChild
         }
         XCTAssertEqual(traversed, expectedArray)
     }
