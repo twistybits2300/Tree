@@ -1,8 +1,3 @@
-# Project
+# Tree
 
-Description
-
-### Overview
-* 
-
-[Roadmap / To Do](./TODO.md)
+A reference semantics implementation of the tree data structure.

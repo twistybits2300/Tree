@@ -2,11 +2,21 @@ import XCTest
 @testable import Tree
 
 final class TreeTests: XCTestCase {
-    func testExample() throws {
-        // XCTest Documentation
-        // https://developer.apple.com/documentation/xctest
+}
 
-        // Defining Test Cases and Test Methods
-        // https://developer.apple.com/documentation/xctest/defining_test_cases_and_test_methods
+struct TreeFixture {
+    var randomNumber: Int {
+        Int.random(in: 0..<100)
+    }
+    var numbers: [Int] {
+        Array(0..<10)
+    }
+    
+    var shuffledNumbers: [Int] {
+        numbers.shuffled()
+    }
+    
+    func makeNodeSUT(_ value: Int) -> TreeNode<Int> {
+        TreeNode(value: value)
     }
 }
