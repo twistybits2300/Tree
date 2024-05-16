@@ -167,8 +167,6 @@ final class AVLTreeTests: XCTestCase {
     /// Validates that `insert(from:value:)` works as expected.
     func test_insert_success() throws {
         let numbers = [9, 5, 4, 8, 1, 12, 2, 11, 14, 13, 10, 7, 0, 3, 6]
-        print(numbers)
-
         var sut = AVLTree<Int>()
 
         for index in numbers.indices {

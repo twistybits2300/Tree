@@ -211,12 +211,6 @@ final class TrieTests: XCTestCase {
         let result = sut.collections(startingWith: "car")
         let sortedResult = result.sorted()
 
-        print(words)
-        print(result)
-        print()
-        print(sortedResult)
-        print(expectedResult)
-        print()
         XCTAssertEqual(sortedResult, expectedResult)
     }
 }
