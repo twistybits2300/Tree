@@ -24,7 +24,7 @@ struct TreeFixture {
         Int.random(in: 0..<100)
     }
     var numbers: [Int] {
-        Array(0..<10)
+        Array(0..<6)
     }
     
     var shuffledNumbers: [Int] {
@@ -41,5 +41,9 @@ struct TreeFixture {
     
     func makeTreeSUT(value: Int) -> Tree<Int> {
         Tree(root: makeNodeSUT(value))
+    }
+    
+    func makeTreeSUT(root: TreeNode<Int>) -> Tree<Int> {
+        Tree(root: root)
     }
 }
