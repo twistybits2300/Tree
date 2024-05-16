@@ -8,12 +8,7 @@ extension Tree {
     public func inOrderTraversal(visit visitor: (TreeNode<T>) -> Void) {
         inOrderTraversal(root: root, visit: visitor)
     }
-    
-    /// Performs an in-order traversal of the tree starting at the given `root`,
-    /// calling the given `visitor` closure on each traversed node.
-    /// - Parameters:
-    ///   - root: The root to start the traversal from.
-    ///   - visitor: The closure to call on visiting each node in the traversal.
+
     private func inOrderTraversal(root: TreeNode<T>?, visit visitor: (TreeNode<T>) -> Void) {
         guard let node = root else {
             return
@@ -22,5 +17,22 @@ extension Tree {
         inOrderTraversal(root: node.left, visit: visitor)
         visitor(node)
         inOrderTraversal(root: node.right, visit: visitor)
+    }
+    
+    /// Performs a pre-order traversal of the tree starting at the given `root`,
+    /// calling the given `visitor` closure on each traversed node.
+    /// - Parameter visitor: The closure to call on visiting each node in the traversal.
+    public func preOrderTraversal(visit visitor: (TreeNode<T>) -> Void) {
+        preOrderTraversal(root: root, visit: visitor)
+    }
+
+    private func preOrderTraversal(root: TreeNode<T>?, visit visitor: (TreeNode<T>) -> Void) {
+        guard let node = root else {
+            return
+        }
+        
+        visitor(node)
+        preOrderTraversal(root: node.left, visit: visitor)
+        preOrderTraversal(root: node.right, visit: visitor)
     }
 }

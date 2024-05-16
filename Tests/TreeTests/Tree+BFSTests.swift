@@ -42,4 +42,41 @@ final class Tree_BFSTests: XCTestCase {
         let visitedValues = visitedNodes.map { $0.value }
         XCTAssertEqual(visitedValues, expectedValues)
     }
+    
+    /// Validates that `preOrderTraversal(visit:)` does not call the visitor closure when the
+    /// tree is empty.
+    func test_preOrderTraversal_empty() throws {
+        var count = 0
+        let sut = fixture.makeEmptyTreeSUT()
+        
+        sut.preOrderTraversal { _ in
+            count += 1
+        }
+        XCTAssertEqual(count, 0)
+    }
+    
+    /// Validates that `preOrderTraversal(visit:)` visits each of the nodes of the tree in the
+    /// expected order.
+    func test_preOrderTraversal() throws {
+        let expectedValues = [1, 2, 4, 5, 3, 6, 7]
+        var visitedNodes = [TreeNode<Int>]()
+        
+        let root = fixture.makeNodeSUT(1)
+        root.set(left: fixture.makeNodeSUT(2))
+        root.set(right: fixture.makeNodeSUT(3))
+        
+        root.left?.set(left: fixture.makeNodeSUT(4))
+        root.left?.set(right: fixture.makeNodeSUT(5))
+        
+        root.right?.set(left: fixture.makeNodeSUT(6))
+        root.right?.set(right: fixture.makeNodeSUT(7))
+        
+        let sut = fixture.makeTreeSUT(root: root)
+        sut.preOrderTraversal { node in
+            visitedNodes.append(node)
+        }
+        
+        let visitedValues = visitedNodes.map { $0.value }
+        XCTAssertEqual(visitedValues, expectedValues)
+    }
 }
