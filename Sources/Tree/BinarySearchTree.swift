@@ -32,4 +32,25 @@ public struct BinarySearchTree<T: Comparable> {
 
         return node
     }
+    
+    /// Searches the tree starting at the root for the provided `value`.
+    /// - Parameter value: The value to be searched for.
+    /// - Returns: `true` if the tree contains the `value`; `false` otherwise.
+    public func contains(_ value: T) -> Bool {
+        var currentNode = root
+
+        while let node = currentNode {
+            if node.value == value {
+                return true
+            }
+
+            if value < node.value {
+                currentNode = node.leftChild
+            } else {
+                currentNode = node.rightChild
+            }
+        }
+
+        return false
+    }
 }

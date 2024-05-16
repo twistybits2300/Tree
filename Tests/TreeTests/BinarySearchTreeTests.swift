@@ -69,6 +69,30 @@ final class BinarySearchTreeTests: XCTestCase {
         
         XCTAssertEqual(traversed, expectedArray)
     }
+    
+    /// Validates that `contains(_ value:)` returns `false` when the tree is empty.
+    func test_contains_false_empty_tree() throws {
+        let index = fixture.treeNumbers.count / 2
+        let searchValue = fixture.treeNumbers[index]
+        let sut = fixture.makeEmptyBinarySearchTreeSUT()
+        XCTAssertFalse(sut.contains(searchValue))
+    }
+
+    /// Validates that `contains(_ value:)` returns `false` when
+    /// the provided value is not contained by the tree.
+    func test_contains_false() throws {
+        let sut = fixture.makeBinarySearchTreeNumbersSUT()
+        XCTAssertFalse(sut.contains(12345))
+    }
+
+    /// Validates that `contains(_ value:)` returns `true`
+    /// when the given value is contained by the tree.
+    func test_contains_true() throws {
+        let index = fixture.treeNumbers.count / 2
+        let searchValue = fixture.treeNumbers[index]
+        let sut = fixture.makeBinarySearchTreeNumbersSUT()
+        XCTAssertTrue(sut.contains(searchValue))
+    }
 }
 
 extension TreeFixture {
