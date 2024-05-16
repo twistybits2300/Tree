@@ -35,4 +35,21 @@ extension Tree {
         preOrderTraversal(root: node.left, visit: visitor)
         preOrderTraversal(root: node.right, visit: visitor)
     }
+    
+    /// Performs a post-order traversal of the tree starting at the given `root`,
+    /// calling the given `visitor` closure on each traversed node.
+    /// - Parameter visitor: The closure to call on visiting each node in the traversal.
+    public func postOrderTraversal(visit visitor: (TreeNode<T>) -> Void) {
+        postOrderTraversal(root: root, visit: visitor)
+    }
+
+    private func postOrderTraversal(root: TreeNode<T>?, visit visitor: (TreeNode<T>) -> Void) {
+        guard let node = root else {
+            return
+        }
+        
+        postOrderTraversal(root: node.left, visit: visitor)
+        postOrderTraversal(root: node.right, visit: visitor)
+        visitor(node)
+    }
 }
