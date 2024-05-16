@@ -11,13 +11,22 @@ let package = Package(
             name: "Tree",
             targets: ["Tree"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/twistybits2300/Queue.git", branch: "main")
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Tree"),
+            name: "Tree",
+            dependencies: [
+                "Queue"
+            ]),
         .testTarget(
             name: "TreeTests",
-            dependencies: ["Tree"]),
+            dependencies: [
+                "Tree",
+                "Queue",
+            ]),
     ]
 )

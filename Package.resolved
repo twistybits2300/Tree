@@ -1,0 +1,24 @@
+{
+  "originHash" : "753677e0b0164974938b167464e1f907f7711eb2cb64be48a577fa0ec342f83e",
+  "pins" : [
+    {
+      "identity" : "linkedlist",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/twistybits2300/LinkedList.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "f61584c1d7c000544f79c049d5a6228ae7358334"
+      }
+    },
+    {
+      "identity" : "queue",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/twistybits2300/Queue.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "5b27a370131470c94df285d279c7d988196bf4d3"
+      }
+    }
+  ],
+  "version" : 3
+}

@@ -24,7 +24,7 @@ struct TreeFixture {
         Int.random(in: 0..<100)
     }
     var numbers: [Int] {
-        Array(0..<6)
+        Array(1..<8)
     }
     
     var shuffledNumbers: [Int] {
