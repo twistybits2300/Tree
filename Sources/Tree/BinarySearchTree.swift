@@ -1,25 +1,25 @@
 import Foundation
 
 /// A value semantics implementation of a binary search tree data structure.
-public struct BinarySearchTree<T: Comparable> {
+public struct BinarySearchTree<Element: Comparable> {
     /// The root node in the tree. Defaults to `nil`.
-    public private(set) var root: TreeNode<T>?
+    public private(set) var root: TreeNode<Element>?
     
     // MARK: - Initialization
     /// Initializes using the given `root` node.
     /// - Parameter root: The tree's root. Defaults to `nil`.
-    public init(root: TreeNode<T>? = nil) {
+    public init(root: TreeNode<Element>? = nil) {
         self.root = root
     }
     
     // MARK: - API
     /// Inserts the given `value` into the tree.
     /// - Parameter value: The value to be inserted.
-    public mutating func insert(_ value: T) {
+    public mutating func insert(_ value: Element) {
         root = insert(from: root, value: value)
     }
     
-    private func insert(from node: TreeNode<T>?, value: T) -> TreeNode<T> {
+    private func insert(from node: TreeNode<Element>?, value: Element) -> TreeNode<Element> {
         guard let node = node else {
             return TreeNode(value: value)
         }
@@ -36,7 +36,7 @@ public struct BinarySearchTree<T: Comparable> {
     /// Searches the tree starting at the root for the provided `value`.
     /// - Parameter value: The value to be searched for.
     /// - Returns: `true` if the tree contains the `value`; `false` otherwise.
-    public func contains(_ value: T) -> Bool {
+    public func contains(_ value: Element) -> Bool {
         var currentNode = root
 
         while let node = currentNode {
@@ -56,11 +56,11 @@ public struct BinarySearchTree<T: Comparable> {
     
     /// Removes the provided `value` from the tree.
     /// - Parameter value: The value to be removed.
-    public mutating func remove(_ value: T) {
+    public mutating func remove(_ value: Element) {
         root = remove(node: root, value: value)
     }
     
-    private func remove(node: TreeNode<T>?, value: T) -> TreeNode<T>? {
+    private func remove(node: TreeNode<Element>?, value: Element) -> TreeNode<Element>? {
         guard let node = node else {
             return nil
         }
